@@ -1,3 +1,4 @@
+// Mario Game by dtdai
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext("2d")
 
@@ -7,6 +8,33 @@ canvas.height = 600
 const gravity = 0.5
 let scrollOffset = 0, score = 0
 var player, platforms, Gline
+
+var img = new Image()
+img.src = "image/character.png"
+var brick = new Image()
+brick.src = "image/brick.png"
+var brick2 = new Image()
+brick2.src = "image/brick2.png"
+var box = new Image()
+box.src = "image/box.png"
+var pipe = new Image()
+pipe.src = "image/pipe.png"
+var pipe2 = new Image()
+pipe2.src = "image/pipe2.png"
+var plat = new Image()
+plat.src = "image/platbrick.png"
+var plat2 = new Image()
+plat2.src = "image/platbrick2.png"
+var plat5 = new Image()
+plat5.src = "image/platbrick5.png"
+var block = new Image()
+block.src = "image/block.png"
+var block2 = new Image()
+block2.src = "image/block2.png"
+var block4 = new Image()
+block4.src = "image/block4.png"
+var castle = new Image()
+castle.src = "image/castle.png" 
 
 class Player {
     constructor(x, y) {
@@ -19,7 +47,8 @@ class Player {
 
     draw() {
         ctx.fillStyle = 'red'
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+        //ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+        ctx.drawImage(img, this.position.x, this.position.y, this.width - 10, this.height)
     }
 
     update() {
@@ -41,7 +70,19 @@ class Platform {
 
     draw() {
         ctx.fillStyle = this.color
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+        if (this.color == 'blue') ctx.drawImage(box, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'gold') ctx.drawImage(castle, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'orange' && this.width == 100) ctx.drawImage(brick2, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'orange') ctx.drawImage(brick, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'lime' && this.height == 100) ctx.drawImage(pipe, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'lime') ctx.drawImage(pipe2, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'pink' && this.width == 250) ctx.drawImage(plat5, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'pink' && this.width == 100) ctx.drawImage(plat2, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'pink') ctx.drawImage(plat, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'gray' && this.width == 200) ctx.drawImage(block4, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'gray' && this.width == 100) ctx.drawImage(block2, this.position.x, this.position.y, this.width, this.height)
+        else if (this.color == 'gray') ctx.drawImage(block, this.position.x, this.position.y, this.width, this.height)
+        else ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
 
@@ -63,54 +104,119 @@ const keys = {
 function Start() {
     player = new Player(200, 400)
     platforms = [
-        new Platform(0, 500, 2550, 120, "pink"),
-        new Platform(2750, 500, 700, 120, "pink"),
-        new Platform(3650, 500, 2750, 120, "pink"),
-        new Platform(6500, 500, 3500, 120, "pink"),
+        new Platform(0, 500, 250, 100, "pink"),
+        new Platform(250, 500, 250, 100, "pink"),
+        new Platform(500, 500, 250, 100, "pink"),
+        new Platform(750, 500, 250, 100, "pink"),
+        new Platform(1000, 500, 250, 100, "pink"),
+        new Platform(1250, 500, 250, 100, "pink"),
+        new Platform(1500, 500, 250, 100, "pink"),
+        new Platform(1750, 500, 250, 100, "pink"),
+        new Platform(2000, 500, 250, 100, "pink"),
+        new Platform(2250, 500, 250, 100, "pink"),
+        new Platform(2500, 500, 50, 100, "pink"),
+        new Platform(2750, 500, 250, 100, "pink"),
+        new Platform(3000, 500, 250, 100, "pink"),
+        new Platform(3250, 500, 100, 100, "pink"),
+        new Platform(3350, 500, 100, 100, "pink"),
+        new Platform(3650, 500, 250, 100, "pink"),
+        new Platform(3900, 500, 250, 100, "pink"),
+        new Platform(4150, 500, 250, 100, "pink"),
+        new Platform(4400, 500, 250, 100, "pink"),
+        new Platform(4650, 500, 250, 100, "pink"),
+        new Platform(4900, 500, 250, 100, "pink"),
+        new Platform(5150, 500, 250, 100, "pink"),
+        new Platform(5400, 500, 250, 100, "pink"),
+        new Platform(5650, 500, 250, 100, "pink"),
+        new Platform(5900, 500, 250, 100, "pink"),
+        new Platform(6150, 500, 250, 100, "pink"),
+        new Platform(6500, 500, 250, 150, "pink"),
+        new Platform(6750, 500, 250, 100, "pink"),
+        new Platform(7000, 500, 250, 100, "pink"),
+        new Platform(7250, 500, 250, 100, "pink"),
+        new Platform(7500, 500, 250, 100, "pink"),
+        new Platform(7750, 500, 250, 100, "pink"),
+        new Platform(8000, 500, 250, 100, "pink"),
+        new Platform(8250, 500, 250, 100, "pink"),
+        new Platform(8500, 500, 250, 100, "pink"),
+        new Platform(8750, 500, 250, 100, "pink"),
+        new Platform(9000, 500, 250, 100, "pink"),
+        new Platform(9250, 500, 250, 100, "pink"),
+        new Platform(9500, 500, 250, 100, "pink"),
+        new Platform(9750, 500, 250, 100, "pink"),
         new Platform(1050, 400, 100, 100, "lime"),
         new Platform(1550, 350, 100, 150, "lime"),
         new Platform(2050, 350, 100, 150, "lime"),
         new Platform(6900, 400, 100, 100, "lime"),
         new Platform(7600, 400, 100, 100, "lime"),
         new Platform(450, 300, 50, 50, "blue"),
-        new Platform(650, 300, 250, 50, "blue"), 
+        new Platform(650, 300, 50, 50, "orange"), 
+        new Platform(700, 300, 50, 50, "blue"),
+        new Platform(750, 300, 50, 50, "orange"),
+        new Platform(800, 300, 50, 50, "blue"),
+        new Platform(850, 300, 50, 50, "orange"),
         new Platform(750, 100, 50, 50, "blue"),
-        new Platform(3000, 300, 150, 50, "blue"),
-        new Platform(3150, 100, 400, 50, "blue"),
-        new Platform(3700, 100, 200, 50, "blue"),
-        new Platform(3850, 300, 50, 50, "blue"),
-        new Platform(4150, 300, 100, 50, "blue"),
+        new Platform(3000, 300, 50, 50, "orange"),
+        new Platform(3050, 300, 50, 50, "blue"),
+        new Platform(3100, 300, 50, 50, "orange"),
+        new Platform(3150, 100, 100, 50, "orange"),
+        new Platform(3250, 100, 100, 50, "orange"),
+        new Platform(3350, 100, 100, 50, "orange"),
+        new Platform(3450, 100, 100, 50, "orange"),
+        new Platform(3700, 100, 100, 50, "orange"),
+        new Platform(3800, 100, 50, 50, "orange"),
+        new Platform(3850, 100, 50, 50, "blue"),
+        new Platform(3850, 300, 50, 50, "orange"),
+        new Platform(4150, 300, 100, 50, "orange"),
         new Platform(4450, 300, 50, 50, "blue"),
         new Platform(4600, 300, 50, 50, "blue"),
         new Platform(4600, 100, 50, 50, "blue"),
         new Platform(4750, 300, 50, 50, "blue"),
-        new Platform(5100, 100, 200, 50, "blue"),
-        new Platform(5150, 300, 100, 50, "blue"),
-        new Platform(5450, 450, 200, 50, "blue"),
-        new Platform(5500, 400, 150, 50, "blue"),
-        new Platform(5550, 350, 100, 50, "blue"),
-        new Platform(5600, 300, 50, 50, "blue"),
-        new Platform(5750, 300, 50, 50, "blue"),
-        new Platform(5750, 350, 100, 50, "blue"),
-        new Platform(5750, 400, 150, 50, "blue"),
-        new Platform(5750, 450, 200, 50, "blue"),
-        new Platform(6150, 450, 250, 50, "blue"),
-        new Platform(6200, 400, 200, 50, "blue"),
-        new Platform(6250, 350, 150, 50, "blue"),
-        new Platform(6300, 300, 100, 50, "blue"),
-        new Platform(6500, 300, 50, 50, "blue"),
-        new Platform(6500, 350, 100, 50, "blue"),
-        new Platform(6500, 400, 150, 50, "blue"),
-        new Platform(6500, 450, 200, 50, "blue"),
-        new Platform(7150, 300, 200, 50, "blue"),
-        new Platform(7700, 450, 400, 50, "blue"),
-        new Platform(7750, 400, 350, 50, "blue"),
-        new Platform(7800, 350, 300, 50, "blue"),
-        new Platform(7850, 300, 250, 50, "blue"),
-        new Platform(7900, 250, 200, 50, "blue"),
-        new Platform(7950, 200, 150, 50, "blue"),
-        new Platform(8000, 150, 100, 50, "blue"),
-        new Platform(8400, 450, 50, 50, "blue"),
+        new Platform(5100, 100, 50, 50, "orange"),
+        new Platform(5150, 100, 50, 50, "blue"),
+        new Platform(5200, 100, 50, 50, "blue"),
+        new Platform(5250, 100, 50, 50, "orange"),
+        new Platform(5150, 300, 50, 50, "orange"),
+        new Platform(5200, 300, 50, 50, "orange"),
+        new Platform(5450, 450, 200, 50, "gray"),
+        new Platform(5500, 400, 50, 50, "gray"),
+        new Platform(5550, 400, 100, 50, "gray"),
+        new Platform(5550, 350, 100, 50, "gray"),
+        new Platform(5600, 300, 50, 50, "gray"),
+        new Platform(5750, 300, 50, 50, "gray"),
+        new Platform(5750, 350, 100, 50, "gray"),
+        new Platform(5750, 400, 100, 50, "gray"),
+        new Platform(5850, 400, 50, 50, "gray"),
+        new Platform(5750, 450, 200, 50, "gray"),
+        new Platform(6150, 450, 200, 50, "gray"),
+        new Platform(6350, 450, 50, 50, "gray"),
+        new Platform(6200, 400, 200, 50, "gray"),
+        new Platform(6250, 350, 100, 50, "gray"),
+        new Platform(6350, 350, 50, 50, "gray"),
+        new Platform(6300, 300, 100, 50, "gray"),
+        new Platform(6500, 300, 50, 50, "gray"),
+        new Platform(6500, 350, 100, 50, "gray"),
+        new Platform(6500, 400, 100, 50, "gray"),
+        new Platform(6600, 400, 50, 50, "gray"),
+        new Platform(6500, 450, 200, 50, "gray"),
+        new Platform(7150, 300, 100, 50, "orange"),
+        new Platform(7250, 300, 50, 50, "blue"),
+        new Platform(7300, 300, 50, 50, "orange"),
+        new Platform(7700, 450, 200, 50, "gray"),
+        new Platform(7900, 450, 200, 50, "gray"),
+        new Platform(7750, 400, 200, 50, "gray"),
+        new Platform(7950, 400, 100, 50, "gray"),
+        new Platform(8050, 400, 50, 50, "gray"),
+        new Platform(7800, 350, 200, 50, "gray"),
+        new Platform(8000, 350, 100, 50, "gray"),
+        new Platform(7850, 300, 200, 50, "gray"),
+        new Platform(8050, 300, 50, 50, "gray"),
+        new Platform(7900, 250, 200, 50, "gray"),
+        new Platform(7950, 200, 100, 50, "gray"),
+        new Platform(8050, 200, 50, 50, "gray"),
+        new Platform(8000, 150, 100, 50, "gray"),
+        new Platform(8400, 450, 50, 50, "gray"),
+        new Platform(8700, 200, 250, 300, "gold"),
     ]
     Gline = new Platform(8415, 100, 20, 350, "cyan")
 }
